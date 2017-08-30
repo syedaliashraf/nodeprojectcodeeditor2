@@ -3,7 +3,7 @@ var serveStatic = require('serve-static');
 var mongodb = require('mongodb').MongoClient;
 
 var app = express();
-var port =  process.env.PORT;
+var port =  8080;
 
 var eventsJson= [  {
                 name: 'Event 1',
