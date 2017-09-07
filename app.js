@@ -107,28 +107,28 @@ app.get('/', function(req, res){
     var url = 'mongodb://localhost:27017/eventApp';
     mongodb.connect(url, function(err, db){
         var eventsCol = db.collection('events');
-//        var usersCol = db.collection('users');
+        var usersCol = db.collection('users');
         var usersAll = "[]";
         
         
 //        registryAggregate(db, function() { });
 //        zipAggregate(db, function() { });
         
-//        usersCol.find({}).toArray( function(err, results) {
-//            usersAll = results;
-//        })
+        usersCol.find({}).toArray( function(err, results) {
+            usersAll = results;
+        });
         
         eventsCol.find({}).toArray( function (err, results) {
             if(results.length === 0) {
                 eventsCol.insertMany(eventsJson, function(err, results){
                     console.log(results);
-                    db.close;
+                    db.close();
                 });
             }
             
             res.render('index', {
-                list: ['services','portfolio','events','team','contact'],
-                // list: ['services','portfolio','events','users','team','contact'],
+                //list: ['services','portfolio','events','team','contact'],
+                list: ['services','portfolio','events','users','team','contact'],
                 events: results,
                 users: usersAll,
                 registry: registryDox,
